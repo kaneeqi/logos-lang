@@ -1,0 +1,32 @@
+// ============================================
+// Problema 1: Operaciones Logicas Basicas
+// ============================================
+// Demuestra las operaciones fundamentales del
+// calculo proposicional: AND, OR, NOT, XOR
+
+// Definir proposiciones
+var p = true;
+var q = false;
+
+// Conjuncion (AND): verdadero solo si ambos son verdaderos
+var and_result = p && q;
+print(and_result);  // false
+
+// Disyuncion (OR): verdadero si al menos uno es verdadero
+var or_result = p || q;
+print(or_result);   // true
+
+// Negacion (NOT): invierte el valor
+var not_p = !p;
+print(not_p);       // false
+
+// Disyuncion exclusiva (XOR): verdadero si exactamente uno es verdadero
+var xor_result = p ^^ q;
+print(xor_result);  // true
+
+// Combinaciones
+var combo1 = (p && q) || (!p && !q);
+print(combo1);      // false
+
+var combo2 = !p || q;
+print(combo2);      // false

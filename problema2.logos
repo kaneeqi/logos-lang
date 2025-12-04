@@ -1,0 +1,41 @@
+// ============================================
+// Problema 2: Leyes de De Morgan
+// ============================================
+// Las leyes de De Morgan establecen que:
+//   !(p && q) <=> (!p || !q)
+//   !(p || q) <=> (!p && !q)
+//
+// Este programa verifica estas equivalencias.
+
+var p = true;
+var q = true;
+
+// Primera Ley de De Morgan: !(p && q) <=> (!p || !q)
+var lado_izq1 = !(p && q);
+var lado_der1 = (!p || !q);
+var demorgan1 = lado_izq1 <=> lado_der1;
+print(demorgan1);  // Debe ser true (la ley se cumple)
+
+// Segunda Ley de De Morgan: !(p || q) <=> (!p && !q)
+var lado_izq2 = !(p || q);
+var lado_der2 = (!p && !q);
+var demorgan2 = lado_izq2 <=> lado_der2;
+print(demorgan2);  // Debe ser true (la ley se cumple)
+
+// Verificar con diferentes valores
+p = false;
+q = true;
+
+// Primera ley con nuevos valores
+var test1_izq = !(p && q);
+var test1_der = (!p || !q);
+var test1 = test1_izq <=> test1_der;
+print(test1);  // true
+
+// Segunda ley con nuevos valores
+var test2_izq = !(p || q);
+var test2_der = (!p && !q);
+var test2 = test2_izq <=> test2_der;
+print(test2);  // true
+
+// Ambas leyes se verifican para cualquier valor de p y q

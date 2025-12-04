@@ -1,0 +1,39 @@
+// ============================================
+// Problema 3: Implicacion y Modus Ponens
+// ============================================
+// Demuestra el uso de la implicacion (=>) y
+// verifica la regla de inferencia Modus Ponens:
+//   Si p => q es verdadero, y p es verdadero,
+//   entonces q debe ser verdadero.
+
+// Definir premisas
+var p = true;   // "Llueve"
+var q = true;   // "El suelo esta mojado"
+
+// Implicacion: p => q ("Si llueve, entonces el suelo esta mojado")
+var implicacion = p => q;
+print(implicacion);  // true
+
+// Modus Ponens: ((p => q) && p) => q
+// Si sabemos que "Si llueve, el suelo esta mojado" Y "Llueve",
+// entonces podemos concluir "El suelo esta mojado"
+var modus_ponens = ((p => q) && p) => q;
+print(modus_ponens);  // Siempre true (tautologia)
+
+// Modus Tollens: ((p => q) && !q) => !p
+// Si "Si llueve, el suelo esta mojado" Y "El suelo NO esta mojado",
+// entonces "NO llueve"
+var modus_tollens = ((p => q) && !q) => !p;
+print(modus_tollens);  // Siempre true (tautologia)
+
+// Falacia de afirmar el consecuente (NO es valida)
+// ((p => q) && q) => p  -- Esto NO es siempre verdadero
+p = false;
+q = true;
+var falacia = ((p => q) && q) => p;
+print(falacia);  // false (demuestra que la falacia es invalida)
+
+// Silogismo hipotetico: ((p => q) && (q => r)) => (p => r)
+var r = true;
+var silogismo = ((p => q) && (q => r)) => (p => r);
+print(silogismo);  // true

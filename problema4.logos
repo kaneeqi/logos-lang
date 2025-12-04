@@ -1,0 +1,64 @@
+// ============================================
+// Problema 4: Simulacion de Circuitos Logicos
+// ============================================
+// Implementa circuitos digitales comunes usando
+// las operaciones logicas del lenguaje.
+
+// Entradas del circuito
+var A = true;
+var B = false;
+var C = true;
+
+// ----------------------------------------
+// Half Adder (Medio Sumador)
+// Suma dos bits, produce Sum y Carry
+// ----------------------------------------
+var sum_half = A ^^ B;      // XOR para la suma
+var carry_half = A && B;    // AND para el acarreo
+print(sum_half);    // true (1)
+print(carry_half);  // false (0)
+
+// ----------------------------------------
+// Full Adder (Sumador Completo)
+// Suma tres bits (A, B, Cin), produce Sum y Cout
+// ----------------------------------------
+var Cin = true;  // Carry de entrada
+
+// Sum = A XOR B XOR Cin
+var sum_full = A ^^ B ^^ Cin;
+print(sum_full);  // false (0)
+
+// Cout = (A AND B) OR (Cin AND (A XOR B))
+var cout_full = (A && B) || (Cin && (A ^^ B));
+print(cout_full);  // true (1)
+
+// ----------------------------------------
+// Multiplexor 2:1
+// Selecciona entre D0 y D1 segun S
+// ----------------------------------------
+var D0 = true;   // Dato 0
+var D1 = false;  // Dato 1
+var S = false;   // Selector
+
+// MUX = (NOT S AND D0) OR (S AND D1)
+var mux_out = (!S && D0) || (S && D1);
+print(mux_out);  // true (selecciona D0)
+
+// Cambiar selector
+S = true;
+mux_out = (!S && D0) || (S && D1);
+print(mux_out);  // false (selecciona D1)
+
+// ----------------------------------------
+// Comparador de igualdad (2 bits)
+// ----------------------------------------
+var X0 = true;
+var X1 = false;
+var Y0 = true;
+var Y1 = false;
+
+// XNOR para cada bit, AND de los resultados
+var eq0 = !(X0 ^^ Y0);  // XNOR
+var eq1 = !(X1 ^^ Y1);  // XNOR
+var equal = eq0 && eq1;
+print(equal);  // true (X == Y)

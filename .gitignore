@@ -1,0 +1,20 @@
+# Build
+build/
+*.o
+*.out
+
+# ANTLR generated
+src/generated/
+antlr4cpp_generated_src/
+
+# JAR (muy pesado)
+*.jar
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
