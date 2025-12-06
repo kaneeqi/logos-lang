@@ -40,7 +40,7 @@ Diseñar e implementar un compilador académico moderno que permita comprender d
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 - **C++17**
 - **ANTLR4**
