@@ -69,9 +69,6 @@ logos-lang/
 │
 └── README.md
 
-yaml
-Copiar código
-
 ---
 
 ## Requisitos
