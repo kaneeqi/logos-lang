@@ -1,6 +1,4 @@
-// ============================================
 // Problema 4: Simulacion de Circuitos Logicos
-// ============================================
 // Implementa circuitos digitales comunes usando
 // las operaciones logicas del lenguaje.
 
@@ -9,10 +7,10 @@ var A = true;
 var B = false;
 var C = true;
 
-// ----------------------------------------
+
 // Half Adder (Medio Sumador)
 // Suma dos bits, produce Sum y Carry
-// ----------------------------------------
+
 var sum_half = A ^^ B;      // XOR para la suma
 var carry_half = A && B;    // AND para el acarreo
 print(sum_half);    // true (1)

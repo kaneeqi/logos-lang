@@ -51,6 +51,10 @@ private:
   
   // Conjunto de constantes (no pueden ser reasignadas)
   std::set<std::string> constants;
+  
+  // Flag de error - detiene la ejecución si hay errores semánticos
+  bool hasError = false;
+  int errorCount = 0;
 
   // Componentes LLVM
   LLVMContext context;
@@ -140,8 +144,17 @@ public:
     irBuilder->CreateRet(ConstantInt::get(Type::getInt32Ty(context), 0));
 
     // Aplicar optimizaciones si estan habilitadas
-    if (enableOptimizations) {
+    if (enableOptimizations && !hasError) {
       TheFPM->run(*mainFunc, *TheFAM);
+    }
+
+    // Verificar si hubo errores semánticos
+    if (hasError) {
+      errs() << "\n; ========================================\n";
+      errs() << "; COMPILACIÓN FALLIDA\n";
+      errs() << "; Se encontraron " << errorCount << " error(es) semántico(s)\n";
+      errs() << "; ========================================\n";
+      return std::any();
     }
 
     // Ejecutar con JIT o imprimir IR
@@ -243,7 +256,17 @@ public:
     
     // Verificar que no sea una constante
     if (constants.find(varName) != constants.end()) {
-      errs() << "Error: No se puede reasignar la constante '" << varName << "'\n";
+      errs() << "Error semántico: No se puede reasignar la constante '" << varName << "'\n";
+      hasError = true;
+      errorCount++;
+      return std::any();
+    }
+    
+    // Verificar que la variable exista
+    if (symbols.find(varName) == symbols.end()) {
+      errs() << "Error semántico: Variable no definida '" << varName << "'\n";
+      hasError = true;
+      errorCount++;
       return std::any();
     }
     
@@ -423,8 +446,10 @@ public:
     if (symbols.find(varName) != symbols.end()) {
       return std::any(symbols[varName]);
     } else {
-      errs() << "Error: Variable no definida '" << varName << "'\n";
-      // Retornar false como valor por defecto
+      errs() << "Error semántico: Variable no definida '" << varName << "'\n";
+      hasError = true;
+      errorCount++;
+      // Retornar false como valor por defecto (para no crashear)
       Value *val = ConstantInt::get(Type::getInt1Ty(context), 0);
       return std::any(val);
     }

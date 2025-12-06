@@ -1,7 +1,8 @@
-// Problema 1: Operaciones Logicas Basicas
+
+// Problema Incorrecto 1: Operaciones Logicas Basicas
 
 // Definir proposiciones
-var p = true;
+var p = banana;
 var q = false;
 
 // Conjuncion (AND): verdadero solo si ambos son verdaderos
